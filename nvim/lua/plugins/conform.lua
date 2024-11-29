@@ -9,7 +9,9 @@ return {
                 css = { "prettier" },
                 go = { "goimports_reviser", "gofmt", "golines" },
                 html = { "prettier" },
+                htmlangular = { "prettier" },
                 javascript = { "prettier" },
+                typescript = { "prettier" },
                 json = { "prettier" },
                 lua = { "stylua" },
                 markdown = { "prettier" },
@@ -44,12 +46,20 @@ return {
 
         -- Override bicep's default indent size
         require("conform").formatters.bicep = {
-            args = { "format", "--stdout", "$FILENAME", "--indent-size", "4" },
+            args = { "format", "--stdout", "$FILENAME", "--indent-size", "2" },
         }
 
         -- Override prettier's default indent type
         require("conform").formatters.prettier = {
-            prepend_args = { "--tab-width", "4" },
+            prepend_args = { "--tab-width", "2" },
         }
+
+        -- Toggle format on save
+        vim.api.nvim_create_user_command("ConformToggle", function()
+            vim.g.disable_autoformat = not vim.g.disable_autoformat
+            print("Conform " .. (vim.g.disable_autoformat and "disabled" or "enabled"))
+        end, {
+            desc = "Toggle format on save",
+        })
     end,
 }

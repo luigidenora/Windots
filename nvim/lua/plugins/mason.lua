@@ -43,6 +43,8 @@ return {
             "taplo",
             "templ",
             "yaml-language-server",
+            "angular-language-server",
+            "typescript-language-server",
         }
 
         if vim.fn.has("win32") == 0 then

@@ -43,10 +43,37 @@ return {
             "taplo",
             "templ", -- requires gopls in PATH, mason probably won't work depending on the OS
             "yamlls",
+            "ts_ls",
         }
         for _, server in pairs(no_config_servers) do
             lspconfig[server].setup({})
         end
+
+        -- Angular
+        local global_library_path = vim.fn.trim(vim.fn.system("npm root -g"))
+        local cmd = {
+            "ngserver",
+            "--stdio",
+            "--tsProbeLocations",
+            global_library_path,
+            "--ngProbeLocations",
+            global_library_path,
+        }
+        vim.filetype.add({
+            pattern = {
+                [".*%.component%.html"] = "htmlangular", -- Sets the filetype to `htmlangular` if it matches the pattern
+            },
+        })
+        vim.cmd("runtime! ftplugin/html.vim!")
+        require("lspconfig").angularls.setup({
+            cmd = cmd,
+            on_new_config = function(new_config, new_root_dir)
+                new_config.cmd = cmd
+            end,
+            root_dir = function(fname)
+                return require("lspconfig").util.root_pattern("angular.json", ".git")(fname) or vim.fn.getcwd()
+            end,
+        })
 
         -- Go
         lspconfig.gopls.setup({
