@@ -1,16 +1,18 @@
 -- Initialize Configuration
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
-local opacity = 0.75
+local opacity = 1
 local transparent_bg = "rgba(22, 24, 26, " .. opacity .. ")"
+local host_os = require("util").get_os()
 
 -- Font
+local emoji_font = "Segoe UI Emoji"
 config.font = wezterm.font_with_fallback({
     {
         family = "JetBrainsMono Nerd Font",
         weight = "Regular",
     },
-    "Segoe UI Emoji",
+    emoji_font,
 })
 config.font_size = 10
 
@@ -19,6 +21,7 @@ config.initial_rows = 45
 config.initial_cols = 180
 config.window_decorations = "RESIZE"
 config.window_background_opacity = opacity
+config.window_background_image = (os.getenv("WEZTERM_CONFIG_FILE") or ""):gsub("wezterm.lua", "bg-blurred.png")
 config.window_close_confirmation = "NeverPrompt"
 config.win32_system_backdrop = "Acrylic"
 config.max_fps = 144
@@ -71,5 +74,14 @@ config.keys = {
     -- Remap paste for clipboard history compatibility
     { key = "v", mods = "CTRL", action = wezterm.action({ PasteFrom = "Clipboard" }) },
 }
+
+-- linux overrides
+if host_os == "linux" then
+    emoji_font = "Noto Color Emoji"
+    config.default_prog = { "zsh" }
+    config.front_end = "WebGpu"
+    config.window_background_image = os.getenv("HOME") .. "/.config/wezterm/bg-blurred.png"
+    config.window_decorations = nil -- use system decorations
+end
 
 return config

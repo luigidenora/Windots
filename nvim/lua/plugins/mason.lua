@@ -42,6 +42,8 @@ return {
             "tailwindcss-language-server",
             "taplo",
             "templ",
+            "terraform-ls",
+            "typescript-language-server",
             "yaml-language-server",
             "angular-language-server",
             "typescript-language-server",
