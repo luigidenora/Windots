@@ -45,7 +45,6 @@ return {
             "terraformls",
             "ts_ls",
             "yamlls",
-            "ts_ls",
         }
         for _, server in pairs(no_config_servers) do
             lspconfig[server].setup({})
