@@ -45,6 +45,7 @@ return {
             "terraform-ls",
             "typescript-language-server",
             "yaml-language-server",
+            "angular-language-server",
         }
 
         if vim.fn.has("win32") == 0 then
