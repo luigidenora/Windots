@@ -53,7 +53,7 @@ return {
             auto_insert_mode = true,
             show_help = false,
             show_folds = false,
-            question_header = "  Scott ",
+            question_header = "  Luigi ",
             answer_header = "  Copilot ",
             window = {
                 layout = "float",

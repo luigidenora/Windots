@@ -1,5 +1,6 @@
 [core]
     editor = nvim
+	hooksPath = C:/Users/ldenora/git_hooks_carely
 [alias]
     co = checkout
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
@@ -10,3 +11,6 @@
 	name = ldenora
 [safe]
 	directory = C:/Users/ldenora/AppData/Local/nvim-data/lazy/blink.cmp
+	directory = C:/Users/ldenora/AppData/Local/nvim-data/lazy/snacks.nvim
+	directory = C:/Users/ldenora/AppData/Local/nvim-data/lazy/neocord
+	directory = C:/Users/ldenora/AppData/Local/nvim-data/lazy/dashboard-nvim

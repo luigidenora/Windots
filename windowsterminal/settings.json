@@ -41,7 +41,7 @@
     "initialCols": 150,
     "initialPosition": ",",
     "initialRows": 38,
-    "launchMode": "focus",
+    "launchMode": "default",
     "newTabMenu": 
     [
         {
