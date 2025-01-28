@@ -14,7 +14,6 @@
 $symlinks = @{
     $PROFILE.CurrentUserAllHosts                                                                    = ".\Profile.ps1"
     "$HOME\AppData\Local\nvim"                                                                      = ".\nvim"
-    "$HOME\AppData\Local\fastfetch"                                                                 = ".\fastfetch"
     "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" = ".\windowsterminal\settings.json"
     "$HOME\.gitconfig"                                                                              = ".\.gitconfig"
     "$HOME\AppData\Roaming\lazygit"                                                                 = ".\lazygit"
@@ -27,7 +26,6 @@ $wingetDeps = @(
     "chocolatey.chocolatey"
     "eza-community.eza"
     "ezwinports.make"
-    "fastfetch-cli.fastfetch"
     "git.git"
     "github.cli"
     "kitware.cmake"
@@ -70,17 +68,17 @@ Write-Host "Installing missing dependencies..."
 $installedWingetDeps = winget list | Out-String
 foreach ($wingetDep in $wingetDeps) {
     if ($installedWingetDeps -notmatch $wingetDep) {
-        winget install --id $wingetDep
+        winget install --id $wingetDep    
     }
 }
 
 # Path Refresh
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
-
+    
 $installedChocoDeps = (choco list --limit-output --id-only).Split("`n")
 foreach ($chocoDep in $chocoDeps) {
     if ($installedChocoDeps -notcontains $chocoDep) {
-        choco install $chocoDep -y
+        choco install $chocoDep -y 
     }
 }
 
@@ -105,6 +103,7 @@ $currentGitName = (git config --global user.name)
 # Create Symbolic Links
 Write-Host "Creating Symbolic Links..."
 foreach ($symlink in $symlinks.GetEnumerator()) {
+    Write-Host  
     Get-Item -Path $symlink.Key -ErrorAction SilentlyContinue | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
     New-Item -ItemType SymbolicLink -Path $symlink.Key -Target (Resolve-Path $symlink.Value) -Force | Out-Null
 }
