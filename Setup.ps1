@@ -32,8 +32,9 @@ $wingetDeps = @(
     "mbuilov.sed"
     "microsoft.powershell"
     "neovim.neovim"
-    "openjs.nodejs"
+    "CoreyButler.NVMforWindows"
     "starship.starship"
+    "Microsoft.PowerToys"
     "task.task"
 )
 $chocoDeps = @(
@@ -78,7 +79,7 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";
 $installedChocoDeps = (choco list --limit-output --id-only).Split("`n")
 foreach ($chocoDep in $chocoDeps) {
     if ($installedChocoDeps -notcontains $chocoDep) {
-        choco install $chocoDep -y
+        choco install $chocoDep -y -force
     }
 }
 
