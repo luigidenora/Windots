@@ -37,7 +37,6 @@ return {
             "typescript",
             "vimdoc",
             "yaml",
-            "typescript",
             "angular",
         },
     },

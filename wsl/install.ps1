@@ -5,5 +5,5 @@
 #requires -Modules ps-arch-wsl
 
 Set-Location -Path $PSScriptRoot
-$Credential = Get-Credential -UserName "scott"
+$Credential = Get-Credential -UserName "luigi"
 Install-ArchWSL -Credential $Credential -PostInstallScript "./arch-post-install.sh"

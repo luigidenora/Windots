@@ -14,7 +14,6 @@
 $symlinks = @{
     $PROFILE.CurrentUserAllHosts                                                                    = ".\Profile.ps1"
     "$HOME\AppData\Local\nvim"                                                                      = ".\nvim"
-    "$HOME\AppData\Local\fastfetch"                                                                 = ".\fastfetch"
     "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" = ".\windowsterminal\settings.json"
     "$HOME\.gitconfig"                                                                              = ".\.gitconfig"
     "$HOME\AppData\Roaming\lazygit"                                                                 = ".\lazygit"
@@ -27,15 +26,15 @@ $wingetDeps = @(
     "chocolatey.chocolatey"
     "eza-community.eza"
     "ezwinports.make"
-    "fastfetch-cli.fastfetch"
     "git.git"
     "github.cli"
     "kitware.cmake"
     "mbuilov.sed"
     "microsoft.powershell"
     "neovim.neovim"
-    "openjs.nodejs"
+    "CoreyButler.NVMforWindows"
     "starship.starship"
+    "Microsoft.PowerToys"
     "task.task"
 )
 $chocoDeps = @(
@@ -80,7 +79,7 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";
 $installedChocoDeps = (choco list --limit-output --id-only).Split("`n")
 foreach ($chocoDep in $chocoDeps) {
     if ($installedChocoDeps -notcontains $chocoDep) {
-        choco install $chocoDep -y
+        choco install $chocoDep -y -force
     }
 }
 

@@ -47,6 +47,9 @@ return {
                     },
                 },
             },
+            keymap = {
+                preset = "super-tab",
+            }
         })
     end,
 }

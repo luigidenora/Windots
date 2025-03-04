@@ -46,7 +46,6 @@ return {
         })
 
         require("CopilotChat").setup({
-            model = "claude-3.5-sonnet",
             auto_insert_mode = true,
             chat_autocomplete = false,
             show_help = false,
