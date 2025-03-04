@@ -33,6 +33,10 @@ opt.linebreak = true
 opt.spelllang = "en_nz"
 opt.showtabline = 0
 
+-- Set statusline
+opt.laststatus = 3
+opt.statusline = require("core.statusline").statusline
+
 -- Set tab width
 opt.tabstop = 4
 opt.shiftwidth = 4
