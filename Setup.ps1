@@ -107,6 +107,8 @@ foreach ($symlink in $symlinks.GetEnumerator()) {
     Get-Item -Path $symlink.Key -ErrorAction SilentlyContinue | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
     New-Item -ItemType SymbolicLink -Path $symlink.Key -Target (Resolve-Path $symlink.Value) -Force | Out-Null
 }
+# Setup zoxide in powershell
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
 
 git config --global --unset user.email | Out-Null
 git config --global --unset user.name | Out-Null

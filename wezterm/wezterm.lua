@@ -1,8 +1,7 @@
 -- Initialize Configuration
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
-local opacity = 0.95
-local transparent_bg = "rgba(22, 24, 26, " .. opacity .. ")"
+local opacity = 0
 
 --- Get the current operating system
 -- @return "windows"| "linux" | "macos"
@@ -28,60 +27,69 @@ config.font = wezterm.font_with_fallback({
     },
     emoji_font,
 })
-config.font_size = 10
-
--- Color Configuration
-config.colors = require("cyberdream")
-config.force_reverse_video_cursor = true
-
+config.font_size = 9
 -- Window Configuration
-config.initial_rows = 45
-config.initial_cols = 180
-config.window_decorations = "RESIZE"
+config.initial_rows = 25
+config.initial_cols = 100
+
 config.window_background_opacity = opacity
 -- config.window_background_image = (os.getenv("WEZTERM_CONFIG_FILE") or ""):gsub("wezterm.lua", "bg-blurred.png")
 config.window_close_confirmation = "NeverPrompt"
--- config.win32_system_backdrop = "Acrylic"
+config.win32_system_backdrop = "Tabbed"
 
 -- Performance Settings
-config.max_fps = 144
+config.max_fps = 60
 config.animation_fps = 60
-config.cursor_blink_rate = 250
 
 -- Tab Bar Configuration
-config.enable_tab_bar = true
-config.show_tab_index_in_tab_bar = false
-config.use_fancy_tab_bar = false
-config.colors.tab_bar = {
-    background = transparent_bg,
-    new_tab = { fg_color = config.colors.background, bg_color = config.colors.brights[6] },
-    new_tab_hover = { fg_color = config.colors.background, bg_color = config.colors.foreground },
+config.enable_tab_bar = false
+config.window_frame = {
+    -- The font used in the tab bar.
+    -- Roboto Bold is the default; this font is bundled
+    -- with wezterm.
+    -- Whatever font is selected here, it will have the
+    -- main font setting appended to it to pick up any
+    -- fallback fonts you may have used there.
+    font = wezterm.font({ family = "Roboto", weight = "Bold" }),
+
+    -- The size of the font in the tab bar.
+    -- Default to 10.0 on Windows but 12.0 on other systems
+    font_size = 9.0,
+
+    -- The overall background color of the tab bar when
+    -- the window is focused
+    active_titlebar_bg = "rgba(00, 00, 00, " .. opacity .. ")",
+
+    -- The overall background color of the tab bar when
+    -- the window is not focused
 }
 
--- Tab Formatting
-wezterm.on("format-tab-title", function(tab, _, _, _, hover)
-    local background = config.colors.brights[1]
-    local foreground = config.colors.foreground
-
-    if tab.is_active then
-        background = config.colors.brights[7]
-        foreground = config.colors.background
-    elseif hover then
-        background = config.colors.brights[8]
-        foreground = config.colors.background
-    end
-
-    local title = tostring(tab.tab_index + 1)
-    return {
-        { Foreground = { Color = background } },
-        { Text = "█" },
-        { Background = { Color = background } },
-        { Foreground = { Color = foreground } },
-        { Text = title },
-        { Foreground = { Color = background } },
-        { Text = "█" },
-    }
-end)
+config.colors = {
+}
+-- -- Tab Formatting
+-- wezterm.on("format-tab-title", function(tab, _, _, _, hover)
+--     local background = config.colors.brights[1]
+--     local foreground = config.colors.foreground
+--
+--     if tab.is_active then
+--         background = config.colors.brights[7]
+--         foreground = config.colors.background
+--     elseif hover then
+--         background = config.colors.brights[8]
+--         foreground = config.colors.background
+--     end
+--
+--     local title = tostring(tab.tab_index + 1)
+--     return {
+--         { Foreground = { Color = background } },
+--         { Text = "█" },
+--         { Background = { Color = background } },
+--         { Foreground = { Color = foreground } },
+--         { Text = title },
+--         { Foreground = { Color = background } },
+--         { Text = "█" },
+--     }
+-- end)
 
 -- Keybindings
 config.keys = {

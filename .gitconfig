@@ -6,11 +6,12 @@
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 [fetch]
     prune = true
-[user]
-	email = ldenora@codearchitects.com
-	name = ldenora
 [safe]
 	directory = C:/Users/ldenora/AppData/Local/nvim-data/lazy/blink.cmp
 	directory = C:/Users/ldenora/AppData/Local/nvim-data/lazy/snacks.nvim
 	directory = C:/Users/ldenora/AppData/Local/nvim-data/lazy/neocord
 	directory = C:/Users/ldenora/AppData/Local/nvim-data/lazy/dashboard-nvim
+[credential "https://devops.codearchitects.com:444"]
+	provider = generic
+[gpg]
+	program = C:\\Program Files (x86)\\Gpg4win\\..\\GnuPG\\bin\\gpg.exe
